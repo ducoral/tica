@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<query output="array">
+    <sql alias="cidade">select * from cidade where estado = ${estado}</sql>
+    <content>
+        <integer>id</integer>
+        <string>nome</string>
+        <string>estado</string>
+        <string>funcaoStr(latitude, longitude)</string>
+        <query key="clientes" output="array">
+            <sql>select * from cliente where cidade_id = ${cidade.id}</sql>
+            <content>
+                <integer>integer_field</integer>
+                <decimal digits="4">decimal_field</decimal>
+                <string>string_field</string>
+                <boolean>boolean_field</boolean>
+                <datetime format="dd/MM/yyyy hh:mm:ss">datetime_field</datetime>
+            </content>
+        </query>
+    </content>
+</query>
