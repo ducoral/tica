@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<query xmlns="tica">
+    <sql alias="estado">select * from estado</sql>
+    <object>
+        <integer key="ibge"/>
+        <string key="nome"/>
+        <string key="sigla"/>
+        <string key="regiao"/>
+        <integer key="municipios"/>
+        <query key="cidades">
+            <sql>teste</sql>
+            <value>teste</value>
+        </query>
+    </object>
+</query>

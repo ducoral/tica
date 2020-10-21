@@ -2,32 +2,48 @@ package com.github.ducoral.tica;
 
 import com.github.ducoral.jutils.XML;
 
+import javax.xml.XMLConstants;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.SchemaFactory;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import static com.github.ducoral.jutils.XML.Element;
+import static com.github.ducoral.jutils.XML.root;
 import static com.github.ducoral.tica.Consts.*;
 
 class Parser {
 
-    static Query parse(Element element) {
-        Element query = accept(element, TAG_QUERY);
-        return parseQuery(query);
+    static QueryOld parse(InputStream xml) {
+        try {
+            byte[] bytes = new byte[xml.available()];
+            xml.read(bytes);
+            SchemaFactory
+                    .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
+                    .newSchema(new StreamSource(Parser.class.getResourceAsStream("/tica.xsd")))
+                    .newValidator()
+                    .validate(new StreamSource(new ByteArrayInputStream(bytes)));
+            return parseQuery(accept(root(new ByteArrayInputStream(bytes)), TAG_QUERY));
+        } catch (Exception e) {
+            throw new Oops(e.getMessage(), e);
+        }
     }
 
-    private static Query parseQuery(Element query) {
+    private static QueryOld parseQuery(Element query) {
         Iterator<Element> iterator = query.children.iterator();
-        Query.Output output = parseOutput(query);
+        QueryOld.Output output = parseOutput(query);
         Property sql = parseSql(iterator);
         List<?> content = parseContent(iterator);
-        return new Query(output, sql, content);
+        return new QueryOld(output, sql, content);
     }
 
-    private static Query.Output parseOutput(Element query) {
+    private static QueryOld.Output parseOutput(Element query) {
         return OUTPUT_OBJECT.equals(query.attributes.get(ATTR_OUTPUT))
-                ? Query.Output.OBJECT
-                : Query.Output.ARRAY;
+                ? QueryOld.Output.OBJECT
+                : QueryOld.Output.ARRAY;
     }
 
     private static Property parseSql(Iterator<Element> iterator) {

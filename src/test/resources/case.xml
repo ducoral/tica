@@ -1,23 +1,20 @@
-<query json="array" xmlns="tica">
+<?xml version="1.0"?>
+<query xmlns="tica">
     <sql alias="cidade">select * from cidade where estado = ${estado}</sql>
     <object>
         <integer key="id"/>
         <string key="nome"/>
         <string key="estado"/>
         <string key="coordenada">funcaoStr(latitude, longitude)</string>
-        <query json="array" key="clientes">
+        <query key="cidades">
             <sql>select * from cliente where cidade_id = ${cidade.id}</sql>
             <object>
                 <integer key="int">integer_field</integer>
-                <decimal key="dec" digits="4">decimal_field</decimal>
+                <decimal key="dec">decimal_field</decimal>
                 <string key="str">string_field</string>
                 <boolean key="boo">boolean_field</boolean>
-                <datetime key="dtm" format="dd/MM/yyyy hh:mm:ss">datetime_field</datetime>
+                <datetime key="dtm">datetime_field</datetime>
             </object>
-        </query>
-        <query key="teste" json="array">
-            <sql>select * from estado</sql>
-            <item>uf</item>
         </query>
     </object>
 </query>
