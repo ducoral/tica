@@ -27,7 +27,7 @@ class QueryOld {
     String toJson(Connection connection, Scope scope) {
         try {
             List<String> params = new ArrayList<>();
-            String select = params(sql.value, params);
+            String select = extractParams(sql.value, params);
             ResultSet rs = prepare(connection.prepareStatement(select), params, scope).executeQuery();
             return output == Output.ARRAY ? toArray(rs, scope) : toObject(rs, scope);
         } catch (Exception e) {
@@ -72,7 +72,7 @@ class QueryOld {
     public static void main(String[] args) {
         List<String> params = new ArrayList<>();
         String sql = "select * ${estado} * ${estado} cliente ${cidade} opa ${estado} where ${cidade.id}";
-        sql = params(sql, params);
+        sql = extractParams(sql, params);
         System.out.println("sql: " + sql + ", params: " + params);
     }
 
