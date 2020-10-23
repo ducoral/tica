@@ -2,11 +2,11 @@
 <query xmlns="tica">
     <sql alias="estado">select * from estado</sql>
     <object>
-        <property key="ibge"/>
-        <property key="nome"/>
-        <property key="sigla"/>
-        <property key="regiao"/>
-        <property key="municipios"/>
+        <integer key="ibge"/>
+        <string key="nome"/>
+        <string key="sigla"/>
+        <string key="regiao"/>
+        <integer key="municipios"/>
         <query key="cidades">
             <sql>teste</sql>
             <item>teste</item>

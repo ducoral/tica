@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="tica" xmlns="tica" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="tica"
+           xmlns="tica"
+           elementFormDefault="qualified">
 
     <xs:element name="query" type="query"/>
 
@@ -7,7 +10,7 @@
         <xs:sequence>
             <xs:element name="sql" type="sql"/>
             <xs:choice>
-                <xs:element name="value" type="value"/>
+                <xs:element name="value" type="item"/>
                 <xs:element name="object" type="object"/>
             </xs:choice>
         </xs:sequence>
@@ -17,7 +20,7 @@
         <xs:sequence>
             <xs:element name="sql" type="sql"/>
             <xs:choice>
-                <xs:element name="value" type="value"/>
+                <xs:element name="item" type="item"/>
                 <xs:element name="object" type="object"/>
             </xs:choice>
         </xs:sequence>
@@ -27,17 +30,13 @@
     <xs:complexType name="object">
         <xs:sequence>
             <xs:choice maxOccurs="unbounded">
-                <xs:element name="string" type="property"/>
-                <xs:element name="integer" type="property"/>
-                <xs:element name="decimal" type="property"/>
-                <xs:element name="boolean" type="property"/>
-                <xs:element name="datetime" type="property"/>
+                <xs:element name="property" type="property"/>
                 <xs:element name="query" type="inner"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
 
-    <xs:simpleType name="value">
+    <xs:simpleType name="item">
         <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
         </xs:restriction>
