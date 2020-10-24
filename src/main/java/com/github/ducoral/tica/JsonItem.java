@@ -10,8 +10,7 @@ public class JsonItem implements QueryItem {
         this.expression = expression;
     }
 
-    @Override
-    public Object evaluate(Map<String, Object> scope) {
+    public Object evaluate(Map<Object, Object> scope) {
         return null;
     }
 }

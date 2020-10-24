@@ -18,10 +18,10 @@ class Sql {
 
     Sql(String alias, String select) {
         this.alias = alias;
-        this.select = extractParameters(select, parameters);
+        this.select = extract(select, parameters);
     }
 
-    ResultSet execute(Connection connection, Map<String, Object> scope) {
+    ResultSet execute(Connection connection, Map<Object, Object> scope) {
 
         return null;
     }

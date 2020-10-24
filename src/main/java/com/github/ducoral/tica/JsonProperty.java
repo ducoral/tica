@@ -15,13 +15,11 @@ class JsonProperty implements Property {
         this.expression = element.value;
     }
 
-    @Override
     public String key() {
         return key;
     }
 
-    @Override
-    public Object evaluate(Map<String, Object> scope) {
+    public Object evaluate(Map<Object, Object> scope) {
         return null;
     }
 }

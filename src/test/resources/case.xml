@@ -1,19 +1,18 @@
 <?xml version="1.0"?>
 <query xmlns="tica">
-    <sql alias="cidade">select * from cidade where estado = ${estado}</sql>
+    <sql alias="estado">select * from estado where regiao = ${regiao}</sql>
     <object>
-        <property key="id"/>
+        <property key="ibge"/>
         <property key="nome"/>
-        <property key="estado"/>
-        <property key="coordenada">funcaoStr(latitude, longitude)</property>
+        <property key="sigla"/>
+        <property key="municipios"/>
         <query key="cidades">
-            <sql>select * from cliente where cidade_id = ${cidade.id}</sql>
+            <sql>select * from cidade where estado = ${estado.sigla}</sql>
             <object>
-                <property key="int">property_field</property>
-                <property key="dec">property_field</property>
-                <property key="str">property_field</property>
-                <property key="boo">property_field</property>
-                <property key="dtm">property_field</property>
+                <property key="ibge"/>
+                <property key="nome"/>
+                <property key="regiao"/>
+                <property key="populacao">populacao + ' (' + porte + ')'</property>
             </object>
         </query>
     </object>

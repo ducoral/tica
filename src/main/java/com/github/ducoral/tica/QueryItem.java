@@ -4,6 +4,6 @@ import java.util.Map;
 
 interface QueryItem {
 
-    Object evaluate(Map<String, Object> scope);
+    Object evaluate(Map<Object, Object> scope);
 
 }

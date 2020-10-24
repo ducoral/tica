@@ -4,7 +4,7 @@ import java.util.Map;
 
 interface Property {
 
-    Object evaluate(Map<String, Object> scope);
+    Object evaluate(Map<Object, Object> scope);
 
     String key();
 }
