@@ -1,8 +1,15 @@
 <query xmlns="tica">
-    <sql>select * from estado</sql>
+    <sql alias="estado">select * from estado</sql>
     <object>
         <property key="id"/>
         <property key="nome"/>
         <property key="sigla"/>
+        <query key="cidades">
+            <sql>select * from cidade where estado = ${estado.sigla}</sql>
+            <object>
+                <property key="id"/>
+                <property key="nome"/>
+            </object>
+        </query>
     </object>
 </query>

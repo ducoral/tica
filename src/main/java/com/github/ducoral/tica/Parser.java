@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.github.ducoral.jutils.XML.*;
-import static com.github.ducoral.tica.Consts.*;
+import static com.github.ducoral.tica.Base.*;
 
 class Parser {
 

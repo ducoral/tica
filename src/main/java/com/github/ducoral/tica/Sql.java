@@ -15,14 +15,18 @@ class Sql {
 
     final String select;
 
-    final List<Object> parameters = new ArrayList<>();
+    final List<String> parameters = new ArrayList<>();
 
     Sql(String alias, String select) {
         this.alias = alias;
         this.select = extract(select, parameters);
     }
 
-    ResultSet execute(Connection connection, Map<Object, Object> scope) {
+    String alias(String identifier) {
+        return safe(alias).isEmpty() ? identifier : alias + "." + identifier;
+    }
+
+    ResultSet execute(Connection connection, Map<String, Object> scope) {
         return select(connection, select, values(parameters, scope).toArray());
     }
 }

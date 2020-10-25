@@ -30,7 +30,7 @@ public class TestCase {
         return JDBC.insert(connection, table, values);
     }
 
-    public boolean update(String table, String condition, Map<Object, Object> values) {
+    public boolean update(String table, String condition, Map<String, Object> values) {
         return JDBC.update(connection, table, condition, values);
     }
 

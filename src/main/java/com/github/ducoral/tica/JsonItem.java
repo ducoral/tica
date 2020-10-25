@@ -12,7 +12,7 @@ public class JsonItem implements QueryItem {
         this.expression = expression;
     }
 
-    public Object evaluate(Map<Object, Object> scope) {
+    public Object evaluate(Map<String, Object> scope) {
         return new Tiziu().evaluate(expression, scope);
     }
 }

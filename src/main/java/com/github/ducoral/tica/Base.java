@@ -1,6 +1,8 @@
 package com.github.ducoral.tica;
 
-final class Consts {
+import com.github.ducoral.tiziu.Tiziu;
+
+final class Base {
 
     static final String TAG_QUERY = "query";
     static final String TAG_SQL = "sql";
@@ -18,6 +20,16 @@ final class Consts {
     static final String MSG_MISSING_TAG = "Está faltando a tag <%s>.";
     static final String MSG_EMPTY_TAG = "A tag <%s> está vazia.";
 
-    private Consts() {
+    private static final ThreadLocal<Tiziu> TIZIU = new ThreadLocal<>();
+
+    static {
+        TIZIU.set(new Tiziu());
+    }
+
+    static Tiziu tiziu() {
+        return TIZIU.get();
+    }
+
+    private Base() {
     }
 }

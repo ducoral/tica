@@ -29,11 +29,21 @@ class Query implements Property {
         return key;
     }
 
-    public Object evaluate(Map<Object, Object> scope) {
+    public Object evaluate(Map<String, Object> scope) {
         return new ArrayList<Object>() {{
             ResultSet rs = sql.execute(connection, scope);
-            while (next(rs))
-                add(item.evaluate(merge(scope, map(rs))));
+            while (next(rs)) {
+                Map<String, Object> localScope = map(rs)
+                        .rename(sql::alias)
+                        .ignore()
+                        .done();
+                localScope = map(localScope)
+                        .merge(scope)
+                        .merge(map(rs).ignore().done())
+                        .ignore()
+                        .done();
+                add(item.evaluate(localScope));
+            }
         }};
     }
 }
