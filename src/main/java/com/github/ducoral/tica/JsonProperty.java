@@ -20,6 +20,6 @@ class JsonProperty implements Property {
     }
 
     public Object evaluate(Map<Object, Object> scope) {
-        return null;
+        return scope.get(key);
     }
 }

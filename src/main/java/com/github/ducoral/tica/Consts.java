@@ -1,10 +1,6 @@
 package com.github.ducoral.tica;
 
-import java.sql.Connection;
-
 final class Consts {
-
-    static final ThreadLocal<Connection> CONNECTION = new ThreadLocal<>();
 
     static final String TAG_QUERY = "query";
     static final String TAG_SQL = "sql";

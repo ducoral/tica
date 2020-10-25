@@ -1,14 +1,22 @@
 package com.github.ducoral.tica;
 
+import com.github.ducoral.jutils.JDBC;
+
 import java.sql.Connection;
 import java.util.Map;
 
-import com.github.ducoral.jutils.JDBC;
+public class TestCase {
 
-class TestCase {
+    protected final Connection connection;
 
-    protected final Connection connection =
-            JDBC.connection("jdbc:hsqldb:file:target/ticadb", "SA", "");
+    public TestCase() {
+        connection = JDBC.connection("jdbc:hsqldb:file:target/ticadb", "SA", "");
+        try {
+            connection.setAutoCommit(false);
+        } catch (Exception e) {
+            throw new Oops(e.getMessage(), e);
+        }
+    }
 
     public boolean create(String table, String... columns) {
         return JDBC.create(connection, table, columns);
@@ -26,4 +34,7 @@ class TestCase {
         return JDBC.update(connection, table, condition, values);
     }
 
+    public void commit() {
+        JDBC.commit(connection);
+    }
 }

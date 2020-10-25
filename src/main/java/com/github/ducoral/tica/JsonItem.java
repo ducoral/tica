@@ -1,5 +1,7 @@
 package com.github.ducoral.tica;
 
+import com.github.ducoral.tiziu.Tiziu;
+
 import java.util.Map;
 
 public class JsonItem implements QueryItem {
@@ -11,6 +13,6 @@ public class JsonItem implements QueryItem {
     }
 
     public Object evaluate(Map<Object, Object> scope) {
-        return null;
+        return new Tiziu().evaluate(expression, scope);
     }
 }

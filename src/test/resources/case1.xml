@@ -1,15 +1,8 @@
-<?xml version="1.0"?>
 <query xmlns="tica">
-    <sql alias="estado">select * from estado</sql>
+    <sql>select * from estado</sql>
     <object>
-        <property key="ibge"/>
+        <property key="id"/>
         <property key="nome"/>
         <property key="sigla"/>
-        <property key="regiao"/>
-        <property key="municipios"/>
-        <query key="cidades">
-            <sql>teste</sql>
-            <item>teste</item>
-        </query>
     </object>
 </query>

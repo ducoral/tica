@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.github.ducoral.jutils.Core.*;
+import static com.github.ducoral.jutils.JDBC.*;
 
 class Sql {
 
@@ -14,7 +15,7 @@ class Sql {
 
     final String select;
 
-    final List<String> parameters = new ArrayList<>();
+    final List<Object> parameters = new ArrayList<>();
 
     Sql(String alias, String select) {
         this.alias = alias;
@@ -22,7 +23,6 @@ class Sql {
     }
 
     ResultSet execute(Connection connection, Map<Object, Object> scope) {
-
-        return null;
+        return select(connection, select, values(parameters, scope).toArray());
     }
 }
