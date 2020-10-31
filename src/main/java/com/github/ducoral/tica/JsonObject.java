@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class JsonObject implements QueryItem {
+class JsonObject implements Evaluable {
 
     final List<Property> properties;
 
@@ -12,10 +12,10 @@ class JsonObject implements QueryItem {
         this.properties = properties;
     }
 
-    public Object evaluate(Map<String, Object> scope) {
+    public Object evaluate(Evaluator evaluator, Map<String, Object> scope) {
         return new HashMap<Object, Object>() {{
             for (Property property : properties)
-                put(property.key(), property.evaluate(scope));
+                put(property.key(), property.evaluate(evaluator, scope));
         }};
     }
 }

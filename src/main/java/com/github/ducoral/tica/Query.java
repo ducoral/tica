@@ -16,9 +16,9 @@ class Query implements Property {
 
     final Sql sql;
 
-    final QueryItem item;
+    final Evaluable item;
 
-    Query(Connection connection, String key, Sql sql, QueryItem item) {
+    Query(Connection connection, String key, Sql sql, Evaluable item) {
         this.connection = connection;
         this.key = key;
         this.sql = sql;
@@ -29,7 +29,7 @@ class Query implements Property {
         return key;
     }
 
-    public Object evaluate(Map<String, Object> scope) {
+    public Object evaluate(Evaluator evaluator, Map<String, Object> scope) {
         return new ArrayList<Object>() {{
             ResultSet rs = sql.execute(connection, scope);
             while (next(rs)) {
@@ -42,7 +42,7 @@ class Query implements Property {
                         .merge(map(rs).ignore().done())
                         .ignore()
                         .done();
-                add(item.evaluate(localScope));
+                add(item.evaluate(evaluator, localScope));
             }
         }};
     }

@@ -1,5 +1,6 @@
 package com.github.ducoral.tica;
 
+import com.github.ducoral.tiziu.Tiziu;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,13 +8,14 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.ducoral.jutils.Core.json;
 import static com.github.ducoral.jutils.Core.map;
 import static com.github.ducoral.jutils.XML.root;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class QueryTest extends TestCase {
+
+    final Evaluator evaluator = (expression, scope) -> new Tiziu().evaluate(expression, scope);
 
     @Before
     public void before() {
@@ -60,7 +62,8 @@ public class QueryTest extends TestCase {
 
         Query query = new Parser(connection).parseQuery(root(xml));
 
-        Object result = query.evaluate(map().done());
+
+        Object result = query.evaluate(evaluator, map().done());
 
         assertTrue(result instanceof List);
 
@@ -107,7 +110,7 @@ public class QueryTest extends TestCase {
 
         Query query = new Parser(connection).parseQuery(root(xml));
 
-        Object result = query.evaluate(map().done());
+        Object result = query.evaluate(evaluator, map().done());
 
         assertTrue(result instanceof List);
 
@@ -161,7 +164,7 @@ public class QueryTest extends TestCase {
 
         Query query = new Parser(connection).parseQuery(root(xml));
 
-        Object result = query.evaluate(map().done());
+        Object result = query.evaluate(evaluator, map().done());
 
         assertTrue(result instanceof List);
 

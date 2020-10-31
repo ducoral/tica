@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.github.ducoral.jutils.XML.*;
-import static com.github.ducoral.tica.Base.*;
+import static com.github.ducoral.tica.Consts.*;
 
 class Parser {
 
@@ -27,10 +27,10 @@ class Parser {
         return new Sql(sql.attribute(ATTR_ALIAS), sql.value);
     }
 
-    QueryItem parseQueryItem(Iterator<Element> iterator) {
+    Evaluable parseQueryItem(Iterator<Element> iterator) {
         Element item = accept(iterator, TAG_OBJECT, TAG_ITEM);
         return item.name.equals(TAG_ITEM)
-                ? new JsonItem(item.value)
+                ? new JsonValue(item.value)
                 : parseObject(item.children.iterator());
     }
 
