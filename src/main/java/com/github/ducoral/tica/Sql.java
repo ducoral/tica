@@ -19,7 +19,7 @@ class Sql {
 
     Sql(String alias, String select) {
         this.alias = alias;
-        this.select = extract(select, parameters);
+        this.select = extract(select, parameters, "?");
     }
 
     String alias(String identifier) {

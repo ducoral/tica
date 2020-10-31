@@ -46,6 +46,7 @@ public class QueryTest extends TestCase {
     @After
     public void tearDown() {
         drop("estado");
+        drop("cidade");
     }
 
     @Test
@@ -264,5 +265,4 @@ public class QueryTest extends TestCase {
         assertEquals(14, cidade.get("id"));
         assertEquals("Cáceres", cidade.get("nome"));
     }
-
 }
